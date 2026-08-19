@@ -1,7 +1,16 @@
 export default function Home() {
+  // 🔴 COLOQUE SEU NÚMERO AQUI (com DDD, somente números)
+  const whatsappNumber = "5537999422997"; 
+
+  // Mensagens pré-formatadas para cada botão
+  const msgGeral = encodeURIComponent("Olá! Gostaria de entender mais sobre o desenvolvimento de sites.");
+  const msgExpress = encodeURIComponent("Olá! Gostaria de contratar a Landing Page Express.");
+  const msgPro = encodeURIComponent("Olá! Gostaria de solicitar uma proposta para o Plano Institucional Pro.");
+  const msgCustom = encodeURIComponent("Olá! Gostaria de uma solução personalizada para o meu projeto.");
+
   return (
     <main className="min-h-screen bg-[#0e111b] text-white selection:bg-[#625fff] selection:text-white">
-      {/* 1. BARRA DE NAVEGAÇÃO */}
+      {/* 1. NAVBAR */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-[#0b0c0e]/80 border-b border-[#172540]">
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -24,8 +33,9 @@ export default function Home() {
           </nav>
 
           <a
-            href="https://wa.me/"
+            href={`https://wa.me/${whatsappNumber}?text=${msgGeral}`}
             target="_blank"
+            rel="noopener noreferrer"
             className="bg-white text-[#0b0c0e] font-medium text-sm px-5 py-2 rounded-full hover:bg-neutral-200 transition-colors"
           >
             Falar no WhatsApp
@@ -33,7 +43,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2. SEÇÃO HERO COM AURORA GLOW */}
+      {/* 2. HERO */}
       <section className="relative overflow-hidden py-20 md:py-28 px-6 border-b border-[#172540]">
         <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#625fff]/20 blur-[130px] rounded-full" />
         <div className="pointer-events-none absolute bottom-10 right-10 w-[350px] h-[350px] bg-[#ff7dda]/15 blur-[120px] rounded-full" />
@@ -50,21 +60,23 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-[#abaebb] font-light max-w-xl leading-relaxed">
-              Criamos plataformas modernas com design premium e arquitetura escalável para destacar o seu negócio no mercado.
+              Criamos plataformas modernas com design premium e arquitetura escalável para posicionar sua marca com autoridade.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
               <a
-                href="#precos"
+                href={`https://wa.me/${whatsappNumber}?text=${msgGeral}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-white text-[#0b0c0e] font-medium px-6 py-3 rounded-full hover:bg-neutral-200 transition-colors text-[15px] shadow-lg shadow-black/40"
               >
-                Ver Nossos Planos
+                Solicitar Orçamento
               </a>
               <a
-                href="#recursos"
+                href="#precos"
                 className="bg-transparent border border-[#3c3f44] text-white font-medium px-6 py-3 rounded-full hover:bg-[#172540] transition-colors text-[15px]"
               >
-                Conhecer Recursos
+                Ver Planos
               </a>
             </div>
           </div>
@@ -94,7 +106,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. SEÇÃO DE RECURSOS */}
+      {/* 3. RECURSOS */}
       <section id="recursos" className="py-24 px-6 border-b border-[#172540]">
         <div className="max-w-[1200px] mx-auto space-y-16">
           <div className="text-center max-w-2xl mx-auto space-y-4">
@@ -105,7 +117,7 @@ export default function Home() {
               Tudo o que sua empresa precisa para dominar o digital
             </h2>
             <p className="text-[#abaebb] text-base md:text-lg font-light">
-              Soluções sob medida construídas com as tecnologias mais modernas do mercado global.
+              Soluções sob medida construídas com as tecnologias mais modernas do mercado.
             </p>
           </div>
 
@@ -136,7 +148,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-medium font-['Figtree'] text-white">Design de Alta Conversão</h3>
                 <p className="text-[#c7c9d1] text-sm leading-relaxed">
-                  Estrutura pensada estrategicamente para conduzir o cliente até o botão de contato com clareza total.
+                  Estrutura pensada para conduzir o cliente até o fechamento de contrato com clareza e autoridade.
                 </p>
               </div>
             </div>
@@ -150,7 +162,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-medium font-['Figtree'] text-white">100% Responsivo</h3>
                 <p className="text-[#c7c9d1] text-sm leading-relaxed">
-                  Experiência visual impecável em smartphones, tablets e computadores de qualquer resolução.
+                  Adaptação perfeita para qualquer smartphone, tablet ou computador.
                 </p>
               </div>
             </div>
@@ -158,7 +170,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. SEÇÃO DE PREÇOS / PLANOS */}
+      {/* 4. PLANOS DE PREÇO */}
       <section id="precos" className="py-24 px-6 relative">
         <div className="max-w-[1200px] mx-auto space-y-16">
           <div className="text-center max-w-xl mx-auto space-y-4">
@@ -166,45 +178,42 @@ export default function Home() {
               Investimento Transparente
             </span>
             <h2 className="text-3xl md:text-5xl font-medium font-['Figtree'] tracking-tight text-white">
-              Escolha o formato ideal para a sua empresa
+              Escolha o formato ideal para o seu projeto
             </h2>
             <p className="text-[#abaebb] text-base font-light">
-              Sem mensalidades surpresa ou taxas escondidas. Entrega rápida e código de alto padrão.
+              Projetos entregues com agilidade, sem surpresas e com código moderno.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-            {/* Plano 1: Essencial */}
+            {/* Plano 1 */}
             <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between space-y-8">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium text-white">Landing Page Express</h3>
-                  <p className="text-xs text-[#abaebb] mt-1">Ideal para validação rápida de produtos e serviços.</p>
+                  <p className="text-xs text-[#abaebb] mt-1">Ideal para validar produtos e campanhas de anúncios.</p>
                 </div>
                 <div className="text-4xl font-medium font-['Figtree'] text-white">
                   R$ 1.490 <span className="text-sm font-normal text-[#abaebb]">/único</span>
                 </div>
                 <ul className="space-y-3 text-sm text-[#c7c9d1]">
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Página única focada em vendas
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Integração com WhatsApp
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Design 100% Responsivo
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Otimização básica de SEO
-                  </li>
+                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Página única de alta conversão</li>
+                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Botões de WhatsApp integrados</li>
+                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Design 100% Responsivo</li>
+                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Otimização de velocidade</li>
                 </ul>
               </div>
-              <button className="w-full bg-transparent border border-[#3c3f44] text-white py-3 rounded-full text-sm font-medium hover:bg-[#172540] transition-colors">
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${msgExpress}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center bg-transparent border border-[#3c3f44] text-white py-3 rounded-full text-sm font-medium hover:bg-[#172540] transition-colors"
+              >
                 Contratar Express
-              </button>
+              </a>
             </div>
 
-            {/* Plano 2: Destaque Profissional */}
+            {/* Plano 2 */}
             <div className="bg-[#12244f] border border-[#24375a] rounded-xl p-8 flex flex-col justify-between space-y-8 relative shadow-2xl shadow-black/60 md:-translate-y-2">
               <div className="absolute -top-3 right-6 bg-[#625fff] text-white text-[11px] font-semibold px-3 py-0.5 rounded-full uppercase tracking-wider">
                 Recomendado
@@ -212,68 +221,58 @@ export default function Home() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium text-white">Institucional Pro</h3>
-                  <p className="text-xs text-[#85a6e9] mt-1">A solução completa para empresas que buscam autoridade.</p>
+                  <p className="text-xs text-[#85a6e9] mt-1">Solução completa para empresas que buscam autoridade.</p>
                 </div>
                 <div className="text-4xl font-medium font-['Figtree'] text-white">
                   R$ 2.890 <span className="text-sm font-normal text-[#abaebb]">/único</span>
                 </div>
                 <ul className="space-y-3 text-sm text-[#ffffff]">
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#625fff]">✓</span> Até 5 páginas completas
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#625fff]">✓</span> Formulários e WhatsApp integrados
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#625fff]">✓</span> Performance máxima (PageSpeed 95+)
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#625fff]">✓</span> Copywriting persuasivo incluso
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#625fff]">✓</span> Domínio e Hospedagem configurados
-                  </li>
+                  <li className="flex items-center gap-2"><span className="text-[#625fff]">✓</span> Até 5 páginas completas</li>
+                  <li className="flex items-center gap-2"><span className="text-[#625fff]">✓</span> Formulários e WhatsApp</li>
+                  <li className="flex items-center gap-2"><span className="text-[#625fff]">✓</span> Performance máxima (PageSpeed 95+)</li>
+                  <li className="flex items-center gap-2"><span className="text-[#625fff]">✓</span> Copywriting persuasivo incluso</li>
                 </ul>
               </div>
-              <button className="w-full bg-white text-[#0b0c0e] py-3 rounded-full text-sm font-medium hover:bg-neutral-200 transition-colors shadow-lg">
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${msgPro}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center bg-white text-[#0b0c0e] py-3 rounded-full text-sm font-medium hover:bg-neutral-200 transition-colors shadow-lg"
+              >
                 Escolher Plano Pro
-              </button>
+              </a>
             </div>
 
-            {/* Plano 3: Custom / SaaS */}
+            {/* Plano 3 */}
             <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between space-y-8">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium text-white">Soluções Sob Medida</h3>
-                  <p className="text-xs text-[#abaebb] mt-1">Sistemas web, painéis administrativos e integrações com IA.</p>
+                  <p className="text-xs text-[#abaebb] mt-1">Sistemas web, painéis e automações.</p>
                 </div>
                 <div className="text-4xl font-medium font-['Figtree'] text-white">
                   Sob Consulta
                 </div>
                 <ul className="space-y-3 text-sm text-[#c7c9d1]">
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Painel de controle exclusivo
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Autenticação e banco de dados
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Integrações com APIs e IA
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-[#85a6e9]">✓</span> Suporte dedicado mensal
-                  </li>
+                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Painel de controle sob medida</li>
+                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Banco de dados e autenticação</li>
+                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Integrações com APIs e IA</li>
                 </ul>
               </div>
-              <button className="w-full bg-transparent border border-[#3c3f44] text-white py-3 rounded-full text-sm font-medium hover:bg-[#172540] transition-colors">
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${msgCustom}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-center bg-transparent border border-[#3c3f44] text-white py-3 rounded-full text-sm font-medium hover:bg-[#172540] transition-colors"
+              >
                 Falar com Especialista
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. RODAPÉ */}
+      {/* 5. FOOTER */}
       <footer className="border-t border-[#172540] bg-[#0b0c0e] py-12 px-6 text-center text-xs text-[#abaebb]">
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
