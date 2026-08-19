@@ -1,21 +1,20 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  const whatsappNumber = "5537999422997"; 
+  const whatsappNumber = "5537999999999"; 
 
-  // Links prontos com WhatsApp
-  const msgGeral = encodeURIComponent("Olá! Gostaria de entender mais sobre o desenvolvimento de sites.");
-  const msgExpress = encodeURIComponent("Olá! Gostaria de contratar a Landing Page Express.");
+  // Mensagens pré-formatadas para WhatsApp
+  const msgGeral = encodeURIComponent("Olá! Gostaria de entender mais sobre o desenvolvimento de sites com a SyntroTech.");
+  const msgExpress = encodeURIComponent("Olá! Gostaria de contratar a Landing Page Express da SyntroTech.");
   const msgPro = encodeURIComponent("Olá! Gostaria de solicitar uma proposta para o Plano Institucional Pro.");
   const msgCustom = encodeURIComponent("Olá! Gostaria de uma solução personalizada para o meu projeto.");
 
-  // Estado interativo do botão de cópia
+  // Estado do botão copiar
   const [copied, setCopied] = useState(false);
 
-  // Efeito interativo de digitação automática no terminal
+  // Efeito interativo do terminal
   const fullCode = `const project = {
   framework: "Next.js 16",
   styling: "Tailwind CSS",
@@ -44,6 +43,32 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Estado do FAQ (Accordion)
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const faqs = [
+    {
+      q: "Qual é o prazo médio de entrega de um site?",
+      a: "Para a Landing Page Express, o prazo médio é de 3 a 5 dias úteis após o envio das informações. Para sites institucionais completos (Plano Pro), a entrega ocorre entre 10 e 15 dias úteis."
+    },
+    {
+      q: "Como funciona a hospedagem e o domínio?",
+      a: "Nós auxiliamos na contratação do seu domínio oficial (.com.br ou .com) e configuramos a hospedagem em servidores de alta performance com certificado de segurança SSL (HTTPS) incluso gratuitamente."
+    },
+    {
+      q: "Eu mesmo consigo alterar textos e imagens depois?",
+      a: "Sim! Construímos estruturas modulares e intuitivas. Além disso, disponibilizamos suporte direto e planos mensais de manutenção caso você prefira que nosso time cuide de todas as atualizações."
+    },
+    {
+      q: "Quais são as formas de pagamento?",
+      a: "Trabalhamos com 50% de entrada no início do projeto e 50% na entrega e aprovação final, via PIX ou cartão de crédito parcelado."
+    }
+  ];
+
   return (
     <main className="min-h-screen bg-[#0e111b] text-white selection:bg-[#625fff] selection:text-white">
       {/* 1. NAVBAR */}
@@ -52,7 +77,7 @@ export default function Home() {
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 rounded-full bg-[#625fff] animate-pulse" />
             <span className="font-['Figtree'] font-semibold text-lg tracking-tight text-white">
-              Syntro
+              SyntroTech
             </span>
           </div>
 
@@ -62,6 +87,9 @@ export default function Home() {
             </a>
             <a href="#precos" className="hover:text-white transition-colors">
               Planos
+            </a>
+            <a href="#faq" className="hover:text-white transition-colors">
+              FAQ
             </a>
           </nav>
 
@@ -76,14 +104,12 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2. HERO COM EFEITOS INTERATIVOS */}
+      {/* 2. HERO */}
       <section className="relative overflow-hidden py-20 md:py-28 px-6 border-b border-[#172540]">
-        {/* Aurora Glows */}
         <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#625fff]/20 blur-[130px] rounded-full" />
         <div className="pointer-events-none absolute bottom-10 right-10 w-[350px] h-[350px] bg-[#ff7dda]/15 blur-[120px] rounded-full" />
 
         <div className="max-w-[1200px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Textos */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-[#85a6e9] bg-[#12244f] border border-[#24375a] rounded-full shadow-inner">
               <span className="relative flex h-2 w-2">
@@ -119,7 +145,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Terminal Interativo com Digitação */}
           <div className="lg:col-span-5 bg-[#0d172b] border border-[#172540] rounded-xl p-5 shadow-2xl relative group hover:border-[#2862d7]/60 transition-colors">
             <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#151e32]">
               <div className="flex items-center gap-2">
@@ -129,7 +154,6 @@ export default function Home() {
                 <span className="text-xs text-[#abaebb] font-mono ml-2">architecture.config.ts</span>
               </div>
 
-              {/* Botão Copiar */}
               <button
                 onClick={handleCopy}
                 className="text-[11px] font-mono px-2.5 py-1 rounded bg-[#172540] text-[#c7c9d1] hover:bg-[#24375a] hover:text-white transition-all"
@@ -138,7 +162,6 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Código com cursor piscando */}
             <div className="min-h-[160px]">
               <pre className="text-xs md:text-sm font-mono text-[#85a6e9] leading-relaxed overflow-x-auto">
                 <code>
@@ -216,7 +239,7 @@ export default function Home() {
       </section>
 
       {/* 4. PLANOS */}
-      <section id="precos" className="py-24 px-6 relative">
+      <section id="precos" className="py-24 px-6 border-b border-[#172540]">
         <div className="max-w-[1200px] mx-auto space-y-16">
           <div className="text-center max-w-xl mx-auto space-y-4">
             <span className="text-xs uppercase font-semibold tracking-wider text-[#85a6e9]">
@@ -316,14 +339,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. FOOTER */}
+      {/* 5. FAQ (PERGUNTAS FREQUENTES INTERATIVAS) */}
+      <section id="faq" className="py-24 px-6 relative">
+        <div className="max-w-[800px] mx-auto space-y-12">
+          <div className="text-center space-y-4">
+            <span className="text-xs uppercase font-semibold tracking-wider text-[#85a6e9]">
+              Dúvidas Comuns
+            </span>
+            <h2 className="text-3xl md:text-4xl font-medium font-['Figtree'] tracking-tight text-white">
+              Perguntas Frequentes
+            </h2>
+            <p className="text-[#abaebb] text-sm md:text-base font-light">
+              Tudo o que você precisa saber antes de iniciar o projeto da sua empresa.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className="bg-[#0d172b] border border-[#172540] rounded-xl overflow-hidden transition-colors hover:border-[#2862d7]/50"
+                >
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 font-medium text-white focus:outline-none"
+                  >
+                    <span className="text-base">{faq.q}</span>
+                    <span
+                      className={`text-[#85a6e9] transition-transform duration-300 text-lg ${
+                        isOpen ? "rotate-45" : "rotate-0"
+                      }`}
+                    >
+                      +
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-6 pb-5 pt-1 text-sm text-[#c7c9d1] font-light leading-relaxed border-t border-[#172540]/40">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. FOOTER */}
       <footer className="border-t border-[#172540] bg-[#0b0c0e] py-12 px-6 text-center text-xs text-[#abaebb]">
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 rounded-full bg-[#625fff]" />
-            <span className="font-semibold text-white">Syntro Solutions</span>
+            <span className="font-semibold text-white">SyntroTech Solutions</span>
           </div>
-          <p>© 2026 Syntro Tech. Todos os direitos reservados.</p>
+          <p>© 2026 SyntroTech. Todos os direitos reservados.</p>
           <div className="flex gap-6 text-[#abaebb]">
             <a href="#" className="hover:text-white transition-colors">Termos</a>
             <a href="#" className="hover:text-white transition-colors">Privacidade</a>
