@@ -1,12 +1,48 @@
+
+"use client";
+
+import { useState, useEffect } from "react";
+
 export default function Home() {
-  // 🔴 COLOQUE SEU NÚMERO AQUI (com DDD, somente números)
   const whatsappNumber = "5537999422997"; 
 
-  // Mensagens pré-formatadas para cada botão
+  // Links prontos com WhatsApp
   const msgGeral = encodeURIComponent("Olá! Gostaria de entender mais sobre o desenvolvimento de sites.");
   const msgExpress = encodeURIComponent("Olá! Gostaria de contratar a Landing Page Express.");
   const msgPro = encodeURIComponent("Olá! Gostaria de solicitar uma proposta para o Plano Institucional Pro.");
   const msgCustom = encodeURIComponent("Olá! Gostaria de uma solução personalizada para o meu projeto.");
+
+  // Estado interativo do botão de cópia
+  const [copied, setCopied] = useState(false);
+
+  // Efeito interativo de digitação automática no terminal
+  const fullCode = `const project = {
+  framework: "Next.js 16",
+  styling: "Tailwind CSS",
+  performance: 100,
+  conversionReady: true,
+  status: "live_in_production"
+};`;
+
+  const [displayedCode, setDisplayedCode] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayedCode(fullCode.slice(0, index));
+      index++;
+      if (index > fullCode.length) {
+        clearInterval(interval);
+      }
+    }, 28);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(fullCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <main className="min-h-screen bg-[#0e111b] text-white selection:bg-[#625fff] selection:text-white">
@@ -14,16 +50,13 @@ export default function Home() {
       <header className="sticky top-0 z-50 backdrop-blur-md bg-[#0b0c0e]/80 border-b border-[#172540]">
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 rounded-full bg-[#625fff]" />
+            <div className="w-4 h-4 rounded-full bg-[#625fff] animate-pulse" />
             <span className="font-['Figtree'] font-semibold text-lg tracking-tight text-white">
               NovaTech
             </span>
           </div>
 
           <nav className="hidden md:flex items-center space-x-8 text-sm text-[#abaebb]">
-            <a href="#solucoes" className="hover:text-white transition-colors">
-              Soluções
-            </a>
             <a href="#recursos" className="hover:text-white transition-colors">
               Recursos
             </a>
@@ -36,22 +69,27 @@ export default function Home() {
             href={`https://wa.me/${whatsappNumber}?text=${msgGeral}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white text-[#0b0c0e] font-medium text-sm px-5 py-2 rounded-full hover:bg-neutral-200 transition-colors"
+            className="bg-white text-[#0b0c0e] font-medium text-sm px-5 py-2 rounded-full hover:bg-neutral-200 hover:scale-105 active:scale-95 transition-all shadow-md"
           >
             Falar no WhatsApp
           </a>
         </div>
       </header>
 
-      {/* 2. HERO */}
+      {/* 2. HERO COM EFEITOS INTERATIVOS */}
       <section className="relative overflow-hidden py-20 md:py-28 px-6 border-b border-[#172540]">
+        {/* Aurora Glows */}
         <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#625fff]/20 blur-[130px] rounded-full" />
         <div className="pointer-events-none absolute bottom-10 right-10 w-[350px] h-[350px] bg-[#ff7dda]/15 blur-[120px] rounded-full" />
 
         <div className="max-w-[1200px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Textos */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-[#85a6e9] bg-[#12244f] border border-[#24375a] rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#625fff] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium text-[#85a6e9] bg-[#12244f] border border-[#24375a] rounded-full shadow-inner">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#625fff] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#625fff]"></span>
+              </span>
               Desenvolvimento Web & Soluções Digitais
             </div>
 
@@ -60,7 +98,7 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-[#abaebb] font-light max-w-xl leading-relaxed">
-              Criamos plataformas modernas com design premium e arquitetura escalável para posicionar sua marca com autoridade.
+              Criamos plataformas modernas com design premium e arquitetura escalável para posicionar sua marca com autoridade máxima.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
@@ -68,40 +106,47 @@ export default function Home() {
                 href={`https://wa.me/${whatsappNumber}?text=${msgGeral}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-[#0b0c0e] font-medium px-6 py-3 rounded-full hover:bg-neutral-200 transition-colors text-[15px] shadow-lg shadow-black/40"
+                className="bg-white text-[#0b0c0e] font-medium px-6 py-3 rounded-full hover:bg-neutral-200 hover:shadow-xl hover:scale-105 active:scale-95 transition-all text-[15px]"
               >
                 Solicitar Orçamento
               </a>
               <a
                 href="#precos"
-                className="bg-transparent border border-[#3c3f44] text-white font-medium px-6 py-3 rounded-full hover:bg-[#172540] transition-colors text-[15px]"
+                className="bg-transparent border border-[#3c3f44] text-white font-medium px-6 py-3 rounded-full hover:bg-[#172540] hover:border-[#85a6e9] transition-all text-[15px]"
               >
                 Ver Planos
               </a>
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-[#0d172b] border border-[#172540] rounded-xl p-5 shadow-2xl relative">
+          {/* Terminal Interativo com Digitação */}
+          <div className="lg:col-span-5 bg-[#0d172b] border border-[#172540] rounded-xl p-5 shadow-2xl relative group hover:border-[#2862d7]/60 transition-colors">
             <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#151e32]">
-              <span className="text-xs text-[#abaebb] font-mono">architecture.config.ts</span>
-              <div className="flex space-x-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#3c3f44]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#3c3f44]" />
-                <div className="w-2.5 h-2.5 rounded-full bg-[#3c3f44]" />
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                <span className="text-xs text-[#abaebb] font-mono ml-2">architecture.config.ts</span>
               </div>
+
+              {/* Botão Copiar */}
+              <button
+                onClick={handleCopy}
+                className="text-[11px] font-mono px-2.5 py-1 rounded bg-[#172540] text-[#c7c9d1] hover:bg-[#24375a] hover:text-white transition-all"
+              >
+                {copied ? "✓ Copiado!" : "Copiar"}
+              </button>
             </div>
 
-            <pre className="text-xs md:text-sm font-mono text-[#c7c9d1] leading-relaxed overflow-x-auto">
-              <code>
-                <span className="text-[#ff7dda]">const</span> project = &#123;{"\n"}
-                {"  "}framework: <span className="text-[#2862d7]">&quot;Next.js 16&quot;</span>,{"\n"}
-                {"  "}styling: <span className="text-[#2862d7]">&quot;Tailwind CSS&quot;</span>,{"\n"}
-                {"  "}speedScore: <span className="text-[#85a6e9]">100</span>,{"\n"}
-                {"  "}conversionOptimized: <span className="text-[#ff7dda]">true</span>,{"\n"}
-                {"  "}status: <span className="text-[#28b6ff]">&quot;ready_to_scale&quot;</span>{"\n"}
-                &#125;;
-              </code>
-            </pre>
+            {/* Código com cursor piscando */}
+            <div className="min-h-[160px]">
+              <pre className="text-xs md:text-sm font-mono text-[#85a6e9] leading-relaxed overflow-x-auto">
+                <code>
+                  {displayedCode}
+                  <span className="inline-block w-2 h-4 ml-0.5 bg-[#625fff] animate-pulse align-middle" />
+                </code>
+              </pre>
+            </div>
           </div>
         </div>
       </section>
@@ -122,7 +167,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between hover:border-[#2862d7]/50 transition-all duration-300">
+            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between hover:border-[#2862d7]/50 hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-lg bg-[#0e111b] border border-[#172540] flex items-center justify-center text-[#2862d7]">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +181,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-[#12244f] border border-[#24375a] rounded-xl p-8 flex flex-col justify-between relative shadow-xl shadow-black/40">
+            <div className="bg-[#12244f] border border-[#24375a] rounded-xl p-8 flex flex-col justify-between relative shadow-xl shadow-black/40 hover:-translate-y-1 transition-all duration-300">
               <div className="absolute -top-3 right-6 bg-[#625fff] text-white text-[11px] font-semibold px-3 py-0.5 rounded-full uppercase tracking-wider">
                 Mais Solicitado
               </div>
@@ -153,7 +198,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between hover:border-[#2862d7]/50 transition-all duration-300">
+            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between hover:border-[#2862d7]/50 hover:-translate-y-1 transition-all duration-300">
               <div className="space-y-4">
                 <div className="w-10 h-10 rounded-lg bg-[#0e111b] border border-[#172540] flex items-center justify-center text-[#2862d7]">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,7 +215,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. PLANOS DE PREÇO */}
+      {/* 4. PLANOS */}
       <section id="precos" className="py-24 px-6 relative">
         <div className="max-w-[1200px] mx-auto space-y-16">
           <div className="text-center max-w-xl mx-auto space-y-4">
@@ -187,11 +232,11 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
             {/* Plano 1 */}
-            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between space-y-8">
+            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between space-y-8 hover:border-[#85a6e9]/40 transition-colors">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium text-white">Landing Page Express</h3>
-                  <p className="text-xs text-[#abaebb] mt-1">Ideal para validar produtos e campanhas de anúncios.</p>
+                  <p className="text-xs text-[#abaebb] mt-1">Ideal para validar produtos e campanhas rápidas.</p>
                 </div>
                 <div className="text-4xl font-medium font-['Figtree'] text-white">
                   R$ 1.490 <span className="text-sm font-normal text-[#abaebb]">/único</span>
@@ -200,7 +245,6 @@ export default function Home() {
                   <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Página única de alta conversão</li>
                   <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Botões de WhatsApp integrados</li>
                   <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Design 100% Responsivo</li>
-                  <li className="flex items-center gap-2"><span className="text-[#85a6e9]">✓</span> Otimização de velocidade</li>
                 </ul>
               </div>
               <a
@@ -214,7 +258,7 @@ export default function Home() {
             </div>
 
             {/* Plano 2 */}
-            <div className="bg-[#12244f] border border-[#24375a] rounded-xl p-8 flex flex-col justify-between space-y-8 relative shadow-2xl shadow-black/60 md:-translate-y-2">
+            <div className="bg-[#12244f] border border-[#24375a] rounded-xl p-8 flex flex-col justify-between space-y-8 relative shadow-2xl shadow-black/60 md:-translate-y-2 hover:border-[#625fff] transition-colors">
               <div className="absolute -top-3 right-6 bg-[#625fff] text-white text-[11px] font-semibold px-3 py-0.5 rounded-full uppercase tracking-wider">
                 Recomendado
               </div>
@@ -237,14 +281,14 @@ export default function Home() {
                 href={`https://wa.me/${whatsappNumber}?text=${msgPro}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center bg-white text-[#0b0c0e] py-3 rounded-full text-sm font-medium hover:bg-neutral-200 transition-colors shadow-lg"
+                className="w-full text-center bg-white text-[#0b0c0e] py-3 rounded-full text-sm font-medium hover:bg-neutral-200 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg"
               >
                 Escolher Plano Pro
               </a>
             </div>
 
             {/* Plano 3 */}
-            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between space-y-8">
+            <div className="bg-[#0d172b] border border-[#172540] rounded-xl p-8 flex flex-col justify-between space-y-8 hover:border-[#85a6e9]/40 transition-colors">
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium text-white">Soluções Sob Medida</h3>
