@@ -52,7 +52,7 @@ export default function Home() {
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 rounded-full bg-[#625fff] animate-pulse" />
             <span className="font-['Figtree'] font-semibold text-lg tracking-tight text-white">
-              NovaTech
+              Syntro
             </span>
           </div>
 
@@ -321,9 +321,9 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 rounded-full bg-[#625fff]" />
-            <span className="font-semibold text-white">NovaTech Solutions</span>
+            <span className="font-semibold text-white">Syntro Solutions</span>
           </div>
-          <p>© 2026 NovaTech. Todos os direitos reservados.</p>
+          <p>© 2026 Syntro Tech. Todos os direitos reservados.</p>
           <div className="flex gap-6 text-[#abaebb]">
             <a href="#" className="hover:text-white transition-colors">Termos</a>
             <a href="#" className="hover:text-white transition-colors">Privacidade</a>
